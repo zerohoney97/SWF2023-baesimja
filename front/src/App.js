@@ -16,12 +16,12 @@ function App() {
     query: "(max-width:768px)",
   });
 
-  useEffect(() => {
-    if (isMobile) {
-      window.location.href =
-        "https://metamask.app.link/dapp/zerohoney--dreamy-arithmetic-91f34a.netlify.app";
-    }
-  });
+  // useEffect(() => {
+  //   if (isMobile) {
+  //     window.location.href =
+  //       "https://metamask.app.link/dapp/zerohoney--dreamy-arithmetic-91f34a.netlify.app";
+  //   }
+  // });
 
   return (
     <div className="App">

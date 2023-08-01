@@ -713,10 +713,11 @@
 			]
 		},
 		"contracts/JusticeToken.sol": {
-			"keccak256": "0x1c87c40b574832d4e26323f623eb59d97196854bf34f6d2968ef446d8ecb9b81",
+			"keccak256": "0xb008f6f562612cfea7f1c46c4d44c86ffc9acc74fbb286f6ee2934c3072128e9",
+			"license": "MIT",
 			"urls": [
-				"bzz-raw://aeab784d5650bb7f2890235f2accdbcedaf7d62eaffebb95005d08fd5eee58d2",
-				"dweb:/ipfs/QmNajRRsxQ5EyM7x9hyJeTsd3YnuaX6sVFT8w9tabnXpMW"
+				"bzz-raw://12bfa7ddb9e667f4420cd38d9f9a333bf07977ecb4f96ab9b68861cc8c3ea268",
+				"dweb:/ipfs/QmWLzFNVJ36AdMAKTPpjY3WsfyQSDAroDiTXTwL83Ycrb7"
 			]
 		}
 	},

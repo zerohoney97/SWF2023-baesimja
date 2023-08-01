@@ -62,19 +62,6 @@
 			},
 			{
 				"inputs": [],
-				"name": "_balanceOf",
-				"outputs": [
-					{
-						"internalType": "uint256",
-						"name": "",
-						"type": "uint256"
-					}
-				],
-				"stateMutability": "view",
-				"type": "function"
-			},
-			{
-				"inputs": [],
 				"name": "_name",
 				"outputs": [
 					{
@@ -177,24 +164,6 @@
 					}
 				],
 				"stateMutability": "view",
-				"type": "function"
-			},
-			{
-				"inputs": [
-					{
-						"internalType": "address",
-						"name": "to",
-						"type": "address"
-					},
-					{
-						"internalType": "uint256",
-						"name": "tokenAmount",
-						"type": "uint256"
-					}
-				],
-				"name": "buyToken",
-				"outputs": [],
-				"stateMutability": "payable",
 				"type": "function"
 			},
 			{
@@ -428,11 +397,11 @@
 			]
 		},
 		"node_modules/@openzeppelin/contracts/token/ERC20/ERC20.sol": {
-			"keccak256": "0x0a961a7fb347bbed937a8f351ca3ed726354613885f3e89af1c00383526a1782",
+			"keccak256": "0xa56ca923f70c1748830700250b19c61b70db9a683516dc5e216694a50445d99c",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://13b8142fc0c58f91eafb46bff83fb4e4bbb4f6d17f411826de1446cfe9d0f4c9",
-				"dweb:/ipfs/QmVyXQDHny4zPDroVeoQABYJFARmizUuNu78G3PQgznQPP"
+				"bzz-raw://cac938788bc4be12101e59d45588b4e059579f4e61062e1cda8d6b06c0191b15",
+				"dweb:/ipfs/QmV2JKCyjTVH3rkWNrfdJRhAT7tZ3usAN2XcnD4h53Mvih"
 			]
 		},
 		"node_modules/@openzeppelin/contracts/token/ERC20/IERC20.sol": {

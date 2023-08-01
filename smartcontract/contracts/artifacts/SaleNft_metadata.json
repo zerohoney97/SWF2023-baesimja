@@ -244,10 +244,11 @@
 			]
 		},
 		"contracts/JusticeToken.sol": {
-			"keccak256": "0xeab993f1924f9edc6d784ddcdd4e1d1f3d2989dc7537cb91557b346a05830e61",
+			"keccak256": "0xb008f6f562612cfea7f1c46c4d44c86ffc9acc74fbb286f6ee2934c3072128e9",
+			"license": "MIT",
 			"urls": [
-				"bzz-raw://e51de5cd649127edd321e9821d42e06042b6fd70ab45381b7e638643e72e91ff",
-				"dweb:/ipfs/QmX3TLQJ6c66mgCJoDQduBV76HGSr9caADwHgSMseZqm9v"
+				"bzz-raw://12bfa7ddb9e667f4420cd38d9f9a333bf07977ecb4f96ab9b68861cc8c3ea268",
+				"dweb:/ipfs/QmWLzFNVJ36AdMAKTPpjY3WsfyQSDAroDiTXTwL83Ycrb7"
 			]
 		},
 		"contracts/SaleNft.sol": {

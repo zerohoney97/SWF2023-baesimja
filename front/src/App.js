@@ -10,9 +10,17 @@ import {
   SignupMobile,
 } from "./pagesmobile";
 import { useMediaQuery } from "react-responsive";
+import { useEffect } from "react";
 function App() {
   const isMobile = useMediaQuery({
     query: "(max-width:768px)",
+  });
+
+  useEffect(() => {
+    if (isMobile) {
+      window.location.href =
+        "https://metamask.app.link/dapp/zerohoney--dreamy-arithmetic-91f34a.netlify.app";
+    }
   });
 
   return (

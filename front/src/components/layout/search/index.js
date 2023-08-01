@@ -28,6 +28,8 @@ import reason from "../../img/reason.png";
 
 import right from "../../img/right.png";
 
+import Chart from "react-apexcharts";
+
 const SearchTop = () => {
   const [isClick1, setClick1] = useState(false);
   const [isClick2, setClick2] = useState(false);
@@ -143,7 +145,26 @@ const ReasonBox = ({ shows, selected }) => {
       </div>
     );
   } else if (shows == graph) {
-    return <div>graph</div>;
+    const state = {
+      options: {
+        chart: {
+          id: 'apexchart-example'
+        },
+        xaxis: {
+          categories: [1991, 1992, 1993, 1994, 1995, 1996, 1997, 1998, 1999]
+        }
+      },
+      series: [{
+        name: 'series-1',
+        data: [30, 40, 35, 50, 49, 60, 70, 91, 125]
+      }]
+    }
+
+    return (
+      <div>
+        <Chart options={state.options} series={state.series} type="bar" width={"500px"} height={"400px"}></Chart>
+      </div>
+    );
   }
 };
 
@@ -244,15 +265,25 @@ const SearchRight = ({ shows, clicked, showGraph, closeSearchRight }) => {
       // DB에 저장
       dispatch(searchAction.saveResult());
 
+      console.log(nftInfo[0]);
+
       // 민팅
       let nft_img = "";
+      if(nftInfo[0].length === 0){
+        nft_img = "https://gateway.pinata.cloud/ipfs/Qmf9LxcVtrsT3PdoxF5no7wc9QQKQDoSEeQn7WTFMPxZiq/nft1.png";
+      }else if(nftInfo[0].length === 1){
+        nft_img = "https://gateway.pinata.cloud/ipfs/Qmf9LxcVtrsT3PdoxF5no7wc9QQKQDoSEeQn7WTFMPxZiq/nft2.png";
+      }else if(nftInfo[0].length === 2){
+        nft_img = "https://gateway.pinata.cloud/ipfs/Qmf9LxcVtrsT3PdoxF5no7wc9QQKQDoSEeQn7WTFMPxZiq/nft3.png";
+      }else{
+        nft_img = "https://gateway.pinata.cloud/ipfs/Qmf9LxcVtrsT3PdoxF5no7wc9QQKQDoSEeQn7WTFMPxZiq/nft1.png";
+      }
+
+      console.log(selected);
       let case_num = selected.case_num;
       let category = selected.category;
       let date = new Date();
       let result;
-
-      const totalNum = await mintJusticeTokenContract.methods.totalSupply();
-      console.log(totalNum);
 
       if (!account) return;
       const res = await mintJusticeTokenContract.methods

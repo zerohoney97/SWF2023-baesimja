@@ -42,31 +42,31 @@ contract JusticeToken is ERC721Enumerable {
         _mint(msg.sender, justiceTokenId);
     }
     function getAllUserNft(address account)  public view returns(string[] memory, string[] memory, string[] memory, string[] memory, string[] memory) {
-    uint256 tokenCount = balanceOf(account);
+        uint256 tokenCount = balanceOf(account);
 
-    // Initialize arrays
-    string[] memory imgs = new string[](tokenCount);
-    string[] memory caseNums = new string[](tokenCount);
-    string[] memory caseNames = new string[](tokenCount);
-    string[] memory dates = new string[](tokenCount);
-    string[] memory sentences = new string[](tokenCount);
+        // Initialize arrays
+        string[] memory imgs = new string[](tokenCount);
+        string[] memory caseNums = new string[](tokenCount);
+        string[] memory caseNames = new string[](tokenCount);
+        string[] memory dates = new string[](tokenCount);
+        string[] memory sentences = new string[](tokenCount);
 
-    for(uint256 i = 0; i < tokenCount; i++){
-        uint256 tokenId = tokenOfOwnerByIndex(account, i);
-        Justice memory justice = justiceTypes[tokenId];
-        
-        // Add the data to the arrays
-        imgs[i] = justice.img;
-        caseNums[i] = justice.caseNum;
-        caseNames[i] = justice.caseName;
-        dates[i] = justice.date;
-        sentences[i] = justice.sentence;
+        for(uint256 i = 0; i < tokenCount; i++){
+            uint256 tokenId = tokenOfOwnerByIndex(account, i);
+            Justice memory justice = justiceTypes[tokenId];
+
+            // Add the data to the arrays
+            imgs[i] = justice.img;
+            caseNums[i] = justice.caseNum;
+            caseNames[i] = justice.caseName;
+            dates[i] = justice.date;
+            sentences[i] = justice.sentence;
+        }
+
+        return (imgs, caseNums, caseNames, dates, sentences);
     }
 
-    return (imgs, caseNums, caseNames, dates, sentences);
-}
-
-function getMsgSender() public view returns(address){
-    return msg.sender;
-}
+    function getMsgSender() public view returns(address){
+        return msg.sender;
+    }
 }

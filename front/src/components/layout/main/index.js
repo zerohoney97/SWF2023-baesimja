@@ -23,7 +23,7 @@ const MainTop = () => {
 
                 <div className='suggest-wrap'>
                     {categoryArr.map((value, index) => {
-                        return <Suggest onClick={() => {setCategory(value)}} className='suggest'># {value}</Suggest>
+                        return <Suggest key={index} onClick={() => {setCategory(value)}} className='suggest'># {value}</Suggest>
                     })}
                 </div>
             </MainSearchBox>

@@ -27,6 +27,7 @@ import graph from "../../img/graph.png";
 import reason from "../../img/reason.png";
 
 import right from "../../img/right.png";
+import { ContractCodeNotStoredError } from "web3";
 
 const SearchTop = () => {
   const [isClick1, setClick1] = useState(false);
@@ -118,7 +119,9 @@ const ReasonBox = ({ shows, selected }) => {
     return (
       <div className="reason-box">
         <div className="reason1">
-          <h1>부산고등법원 제2형사부 판결</h1>
+
+                {/* 정적 데이터 */}
+          {/* <h1>부산고등법원 제2형사부 판결</h1>
           <ul>
             <li>사건 : 2018노22 살인, 살인미수</li>
             <li>피고인A : 항소인피고인</li>
@@ -126,7 +129,30 @@ const ReasonBox = ({ shows, selected }) => {
             <li>변호인 : 법무법인 ○이파트너스</li>
             <li>원심 : 판결울산지방법원 2017. 12. 8. 선고 2017고합219</li>
             <li>판결 : 판결선고2018. 5. 30.</li>
-          </ul>
+          </ul> */}
+
+          {
+          selected.header.split("\n").map((value, index) => {
+            let arr = [];
+            let h1;
+
+            if (index == 0) {
+              h1 = <h1>{value}</h1>
+            } else {
+                if (value.trim() != "") {
+                  console.log("dfdf ",value);
+                  arr.push(<li>{value.trim()}</li>);
+                }
+            }
+            return (
+              <>
+                {h1}
+                <ul style={{marginBottom:0}}>{arr}</ul>
+                <br />
+              </>
+            );
+          })}
+
         </div>
         <div className="reason2">
           <h1>주문</h1>

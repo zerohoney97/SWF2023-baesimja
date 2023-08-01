@@ -54,7 +54,7 @@ const SearchInput = ({width, keyword, category}) => {
 
 
   return (
-    <SearchInputBox width={width}>
+    <SearchInputBox width={width} fontSize={"14px"}>
         <div className='search-input-wrap'>
           <div onClick={moveToSearch} className='search-img'><img src={searchImg} alt="" /></div>
           <input

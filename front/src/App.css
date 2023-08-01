@@ -1,7 +1,7 @@
 .App {
   width: 100vw;
   text-align: center;
-  overflow: hidden;
+  /* overflow: hidden; */
 }
 
 /* search 페이지 검색 분류 */

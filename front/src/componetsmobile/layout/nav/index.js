@@ -39,7 +39,6 @@ const TopNav = ({ addInput, keyword }) => {
           <img src={logo} alt="logo" />
         </Link>
 
-        {addInput && <SearchInput keyword={keyword} />}
 
         <div className="btns">
           <Button onClick={moveToMyNft} color={color}>

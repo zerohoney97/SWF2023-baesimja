@@ -49,31 +49,29 @@ const SearchTop = () => {
 };
 
 const SearchLeft = ({ openSearchRight }) => {
-    const location = useLocation();
-    const queryParams = new URLSearchParams(location.search);
-    const p = queryParams.get('page');
+  const location = useLocation();
+  const queryParams = new URLSearchParams(location.search);
+  const p = queryParams.get("page");
 
-    const [page, setPage] = useState(p);
-    const [pageArr, setArr] = useState();
+  const [page, setPage] = useState(p);
+  const [pageArr, setArr] = useState();
 
+  // db에서 axios로 정보 받아와서 넘기기...
+  let searchArr = useSelector((state) => state.search.searchArr);
+  useEffect(() => {
+    if (searchArr.lenth !== 0) {
+      let pageArr = [];
+      let totalPage = Math.ceil(searchArr.length / 5);
+      for (let i = 0; i < totalPage; i++) {
+        pageArr.push(i + 1);
+      }
+      setArr(pageArr);
+    }
+  }, [searchArr]);
 
-    // db에서 axios로 정보 받아와서 넘기기...
-    let searchArr = useSelector((state) => state.search.searchArr);
-    useEffect(() => {
-        if(searchArr.lenth !== 0) {
-            let pageArr = [];
-            let totalPage = Math.ceil(searchArr.length / 5);
-            for(let i=0; i<totalPage; i++) {
-                pageArr.push(i+1);
-            }
-            setArr(pageArr);
-        }
-    }, [searchArr]);
-
-    useEffect(() => {
-        console.log(pageArr);
-    }, [pageArr])
-
+  useEffect(() => {
+    console.log(pageArr);
+  }, [pageArr]);
 
   if (searchArr.length == 0) {
     return (
@@ -95,9 +93,14 @@ const SearchLeft = ({ openSearchRight }) => {
             );
           })}
           <PaginationBox>
-            {pageArr && pageArr.map((value, index) => {
-                return <div key={index} className="page-btn">{value}</div>
-            })}
+            {pageArr &&
+              pageArr.map((value, index) => {
+                return (
+                  <div key={index} className="page-btn">
+                    {value}
+                  </div>
+                );
+              })}
           </PaginationBox>
         </SearchMidBox>
       </>
@@ -317,7 +320,14 @@ const SearchRight = ({ shows, clicked, showGraph, closeSearchRight }) => {
                 </CircleBtn>
               </>
             )}
-            <div onClick={() => {closeSearchRight(0)}} className="close-btn">x</div>
+            <div
+              onClick={() => {
+                closeSearchRight(0);
+              }}
+              className="close-btn"
+            >
+              x
+            </div>
           </BtnBox>
 
           <TitleBox>

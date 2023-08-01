@@ -11,7 +11,7 @@ export const MyNftBox = styled.div`
     margin: 0px auto 50px;
     padding: 15px;
     position: relative;
-    width: 1200px;
+    width: 100%;
     height: auto;
     background: linear-gradient(to right, #111111, #6699CC);
     border-radius: 15px;

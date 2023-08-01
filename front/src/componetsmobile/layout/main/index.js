@@ -3,6 +3,9 @@ import { MainSearchBox, Suggest, MainExamBox, MainExam } from './Main.styled'
 import {SearchInput} from '../searchInput'
 import { useSelector } from 'react-redux';
 
+import mainExam from '../../img/mainExam.png'
+import mainExam2 from '../../img/mainExam2.png'
+
 const MainTop = () => {
     // 정적 데이터로? db에서 Length 끌고오기?
     let caseNum = '1,234';
@@ -35,8 +38,12 @@ const MainMid = () => {
     return (
         <div>
             <MainExamBox>
-                <MainExam width={'100%'} />
-                <MainExam width={'100%'} />
+                <MainExam width={'100%'}>
+                    <img src={mainExam} style={{width : "100%"}}></img>
+                </MainExam>
+                <MainExam width={'100%'}>
+                    <img src={mainExam2} style={{width : "100%"}}></img>
+                </MainExam>
             </MainExamBox>
         </div>
     )

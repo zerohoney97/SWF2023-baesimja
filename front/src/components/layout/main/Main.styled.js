@@ -62,7 +62,7 @@ export const MainExamBox = styled.div`
 
 export const MainExam = styled.div`
     width: ${(props) => props.width||'30%'};
-    height: 100%;
+    /* height: 100%; */
     margin: 10px;
     border-radius: 15px;
     background-color: white;

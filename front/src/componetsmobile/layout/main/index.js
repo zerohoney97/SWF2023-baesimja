@@ -18,8 +18,8 @@ const MainTop = () => {
                 <p className='big-text'>국내 최초 판례 설문 NFT 발행,</p>
                 <p className='big-text'>배심자들.</p>
                 <p className='small-text'>전체 판례 <span>{caseNum} 건</span> | 전체 설문 완료 수 <span>{finNum} 건</span></p>
-                
-                <SearchInput width={'750px'} category={category} />
+
+                <SearchInput width={'94%'} category={category} />
 
                 <div className='suggest-wrap'>
                     {categoryArr.map((value, index) => {
@@ -35,8 +35,8 @@ const MainMid = () => {
     return (
         <div>
             <MainExamBox>
-                <MainExam width={'70%'} />
-                <MainExam width={'30%'} />
+                <MainExam width={'100%'} />
+                <MainExam width={'100%'} />
             </MainExamBox>
         </div>
     )

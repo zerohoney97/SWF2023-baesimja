@@ -10,6 +10,7 @@ export const SearchInputBox = styled.div`
         background-color: white;
         display: flex; align-items: center;
         padding: 0 30px 0 30px;
+        margin: ${(props) => props.margin || 'auto'};
         box-sizing: border-box;
     }
     & .search-input-wrap .search-img {
@@ -23,7 +24,7 @@ export const SearchInputBox = styled.div`
         width: 100%; height: 30px;
         padding: 10px;
         box-sizing: border-box;
-        font-size: 18px;
+        font-size: ${(props) => props.fontSize || '18px'};
         border: none; outline: none;
     }
 `

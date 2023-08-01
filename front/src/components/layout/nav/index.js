@@ -26,7 +26,6 @@ const TopNav = ({ addInput, keyword }) => {
 
   function moveToMyNft() {
     nav("/mynft");
-    alert("로그인 후 이용 가능합니다.");
   }
 
   return (

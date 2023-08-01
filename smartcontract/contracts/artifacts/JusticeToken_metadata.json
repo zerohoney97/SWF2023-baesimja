@@ -220,6 +220,30 @@
 			{
 				"inputs": [
 					{
+						"internalType": "address",
+						"name": "account",
+						"type": "address"
+					},
+					{
+						"internalType": "string",
+						"name": "caseNum",
+						"type": "string"
+					}
+				],
+				"name": "isDuplication",
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "",
+						"type": "bool"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
 						"internalType": "uint256",
 						"name": "",
 						"type": "uint256"
@@ -713,10 +737,10 @@
 			]
 		},
 		"contracts/JusticeToken.sol": {
-			"keccak256": "0x1c87c40b574832d4e26323f623eb59d97196854bf34f6d2968ef446d8ecb9b81",
+			"keccak256": "0xc7d650559c8c2068007777dbf40e319e75bf3f2587aff40d62059954bc41333b",
 			"urls": [
-				"bzz-raw://aeab784d5650bb7f2890235f2accdbcedaf7d62eaffebb95005d08fd5eee58d2",
-				"dweb:/ipfs/QmNajRRsxQ5EyM7x9hyJeTsd3YnuaX6sVFT8w9tabnXpMW"
+				"bzz-raw://231a5a81e48978695bb8e242cb04d99b868b0b8fe65241dbb930e57c5cf8eefb",
+				"dweb:/ipfs/QmYoM67KmGxZTqHXS9FDAgk2ZFseKVVjzS3d6KGQuiAUez"
 			]
 		}
 	},

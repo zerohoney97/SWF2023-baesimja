@@ -244,10 +244,10 @@
 			]
 		},
 		"contracts/JusticeToken.sol": {
-			"keccak256": "0xeab993f1924f9edc6d784ddcdd4e1d1f3d2989dc7537cb91557b346a05830e61",
+			"keccak256": "0x1c87c40b574832d4e26323f623eb59d97196854bf34f6d2968ef446d8ecb9b81",
 			"urls": [
-				"bzz-raw://e51de5cd649127edd321e9821d42e06042b6fd70ab45381b7e638643e72e91ff",
-				"dweb:/ipfs/QmX3TLQJ6c66mgCJoDQduBV76HGSr9caADwHgSMseZqm9v"
+				"bzz-raw://aeab784d5650bb7f2890235f2accdbcedaf7d62eaffebb95005d08fd5eee58d2",
+				"dweb:/ipfs/QmNajRRsxQ5EyM7x9hyJeTsd3YnuaX6sVFT8w9tabnXpMW"
 			]
 		},
 		"contracts/SaleNft.sol": {

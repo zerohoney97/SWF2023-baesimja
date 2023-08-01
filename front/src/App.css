@@ -1,0 +1,77 @@
+.App {
+  width: 100vw;
+  text-align: center;
+  overflow: hidden;
+}
+
+/* search 페이지 검색 분류 */
+.select {
+  width: auto; height: 35px;
+  background-color: white;
+  border: 1px solid;
+  border-radius: 20px;
+  font-size: 15px; font-weight: 600;
+  padding: 0 30px 0 20px;
+  margin: 0 10px 0 0;
+  display: flex; justify-content: center; align-items: center;
+  position: relative;
+  cursor: pointer;
+}
+.select img {
+  position: absolute; right: 15px;
+  height: 10px;
+}
+.select .option-box {
+  width: auto; height: auto;
+  border: 1px solid silver;
+  border-radius: 5px;
+  position: absolute; top: 45px; left: 0;
+}
+.select .option-box .option {
+  width: 200px; height: 40px;
+  display: flex; align-items: center; justify-content: start;
+  padding: 5px 10px 5px 10px;
+  box-sizing: border-box;
+  cursor: pointer;
+  background-color: white;
+}
+.select .option-box .option:hover {
+  background-color: rgb(230, 230, 230);
+}
+
+/* search 페이지 케이스 */
+.case {
+  width: 100%; height: auto;
+  min-height: 150px; max-height: 200px;
+  border-bottom: 1px solid silver;
+  padding: 20px;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+.case .title-box {
+  width: 100%;
+  display: flex;
+}
+.case .title {
+  width: calc(100% - 120px); height: auto;
+  max-height: 50px;
+  font-size: 20px; font-weight: bold;
+  text-align: start;
+  cursor: pointer;
+  overflow: hidden;
+}
+.case .title:hover {
+  text-decoration: underline;
+}
+.case span {
+  width: 60px;
+  font-size: 12px; font-weight: 200;
+}
+.case .detail {
+  width: 100%; height: auto;
+  min-height: 50px; max-height: 100px;
+  font-size: 15px;
+  text-align: start;
+  overflow: hidden;
+  line-height: 25px;
+}

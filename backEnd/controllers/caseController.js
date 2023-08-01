@@ -151,6 +151,16 @@ exports.getDetailCase = async (req, res) => {
         // }
         data.dataValues.resultStr = str;
 
+
+        // 설문 완료했는지 여부 반환
+        let isFinished = false;
+        if (isLogin) {
+            const finished = await Finished.findOne({where : {case_id: id, user_id : req.decoded.id}});
+            if (finished) {
+                isFinished = true;
+            }
+        }
+
         // 관심판례였는지 여부 반환
         let isInterested=false;
         if (isLogin) {
@@ -160,7 +170,7 @@ exports.getDetailCase = async (req, res) => {
             }
         }
 
-        return res.json({ case : data, isLogin, isInterested });
+        return res.json({ case : data, isLogin, isFinished, isInterested });
     } catch (error) {
         console.log(error);
         return res.json({ error });
@@ -237,6 +247,12 @@ exports.addResult = async (req, res) => {
     try {
         const { id } = req.decoded;
         const { case_id, result, is_probation, probation_result } = req.body;
+
+        const finished = await Finished.findOne({where : {case_id, user_id : id}});
+        if (finished) {
+            return res.json({message : "실패"});
+        }
+
         await Finished.create({user_id : id, case_id, result, is_probation, probation_result});
         return res.json({message : "성공"})
     } catch (error) {

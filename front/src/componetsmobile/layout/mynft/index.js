@@ -8,14 +8,11 @@ import nft3 from "../../img/nft3.png";
 import right from "../../img/right.png";
 
 const MyNftTop = () => {
-  let user_id = "blah";
-  let nft_num = 10;
+  let user_id = "your";
 
   return (
     <>
-      <Top>
-        {user_id}'s Collections ({nft_num})
-      </Top>
+      <Top>{user_id} Collections</Top>
     </>
   );
 };

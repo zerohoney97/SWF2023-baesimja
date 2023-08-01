@@ -1,7 +1,7 @@
 import { AbiItem } from "web3-utils";
 import Web3 from "web3";
 
-const mintJusticeTokenAbi = [
+const mintJusticeTokenAbi =[
 	{
 		"inputs": [],
 		"stateMutability": "nonpayable",
@@ -204,6 +204,30 @@ const mintJusticeTokenAbi = [
 			}
 		],
 		"name": "isApprovedForAll",
+		"outputs": [
+			{
+				"internalType": "bool",
+				"name": "",
+				"type": "bool"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "account",
+				"type": "address"
+			},
+			{
+				"internalType": "string",
+				"name": "caseNum",
+				"type": "string"
+			}
+		],
+		"name": "isDuplication",
 		"outputs": [
 			{
 				"internalType": "bool",
@@ -627,7 +651,7 @@ const saleAnimalTokenAbi = [
   },
 ];
 
-const mintJusticeTokenAddress = "0xaF1B31f4F4F6f779112fBCD866E375e4F7416f86";
+const mintJusticeTokenAddress = "0xBb4dd3497bfAB96F2Ba1953Bf45C093404e23387";
 const saleAnimalTokenAddress = "0xD18A24028a13D542F725c459812A149d815644FE";
 
 export const web3 = new Web3(window.ethereum);

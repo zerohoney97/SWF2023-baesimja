@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { useLocation } from "react-router-dom";
 import axios from "axios";
 import { mintJusticeTokenContract } from "./abiConfig";
-
 import { searchAction } from "../../../middleware";
 
 import {
@@ -28,6 +27,7 @@ import reason from "../../img/reason.png";
 
 import right from "../../img/right.png";
 import { ContractCodeNotStoredError } from "web3";
+import Chart from "../../../chart/Chart";
 
 const SearchTop = () => {
   const [isClick1, setClick1] = useState(false);
@@ -109,9 +109,31 @@ const SearchLeft = ({ openSearchRight }) => {
   }
 };
 
-const ReasonBox = ({ shows, selected }) => {
+const ReasonBox = ({ shows, selected, nftInfo }) => {
+  const [nftArr, setNftArr] = useState([]);
+  const rawNftToObject = () => {
+    const tempArr = [...nftArr];
+    nftInfo["0"].forEach((el, index) => {
+      tempArr.push({
+        img: nftInfo["0"][index],
+        caseNum: nftInfo["1"][index],
+        caseName: nftInfo["2"][index],
+        date: nftInfo["3"][index],
+        sentence: nftInfo["4"][index],
+      });
+    });
+    setNftArr(tempArr);
+  };
+  useEffect(() => {
+    if (nftInfo !== "") {
+      rawNftToObject();
+    }
+  }, [nftInfo]);
   let splited;
   useEffect(() => {
+    // console.log(selected,'ahhh')
+    // console.log(selected.reason.split("\n"), "ahh");
+    console.log(nftInfo, "뉴뉴");
     splited = selected.reason.split("\n");
   }, [selected]);
 
@@ -119,8 +141,7 @@ const ReasonBox = ({ shows, selected }) => {
     return (
       <div className="reason-box">
         <div className="reason1">
-
-                {/* 정적 데이터 */}
+          {/* 정적 데이터 */}
           {/* <h1>부산고등법원 제2형사부 판결</h1>
           <ul>
             <li>사건 : 2018노22 살인, 살인미수</li>
@@ -131,7 +152,7 @@ const ReasonBox = ({ shows, selected }) => {
             <li>판결 : 판결선고2018. 5. 30.</li>
           </ul> */}
 
-          {
+          {/* {
           selected.header.split("\n").map((value, index) => {
             let arr = [];
             let h1;
@@ -151,8 +172,7 @@ const ReasonBox = ({ shows, selected }) => {
                 <br />
               </>
             );
-          })}
-
+          })} */}
         </div>
         <div className="reason2">
           <h1>주문</h1>
@@ -172,7 +192,7 @@ const ReasonBox = ({ shows, selected }) => {
       </div>
     );
   } else if (shows == graph) {
-    return <div>graph</div>;
+    return <Chart nftArr={nftArr} casenum={selected.case_num} shows={shows} />;
   }
 };
 
@@ -182,8 +202,19 @@ const SearchRight = ({ shows, clicked, showGraph, closeSearchRight }) => {
   const [star, setStar] = useState(starE);
   const [display, setDisplay] = useState("flex");
   const [result, setResult] = useState("N년 N월");
+  // 징역
+  const [imprisonment, setImprisoment] = useState({
+    year: 0,
+    month: 0,
+  });
+  // 집행유예
+  const [probation, setProbation] = useState({
+    year: 0,
+    month: 0,
+  });
+  const selectedData = useSelector((state) => state.search.selected);
 
-  const selected = useSelector((state) => state.search.selected);
+  const selected = selectedData[0];
   const isLogin = useSelector((state) => state.login.isLogin);
   const isInterested = useSelector((state) => state.search.isInterested);
 
@@ -212,9 +243,7 @@ const SearchRight = ({ shows, clicked, showGraph, closeSearchRight }) => {
   }, [account]);
 
   useEffect(() => {
-    if (isLogin == true) {
-      setDisplay("none");
-    }
+    setDisplay("none");
   }, [isLogin]);
 
   useEffect(() => {
@@ -270,42 +299,58 @@ const SearchRight = ({ shows, clicked, showGraph, closeSearchRight }) => {
   // 민팅
   const mint = async () => {
     try {
+      // 시간
+      const currentDate = new Date();
+
+      const year = currentDate.getFullYear();
+      const month = String(currentDate.getMonth() + 1).padStart(2, "0");
+      const day = String(currentDate.getDate()).padStart(2, "0");
+      const hours = String(currentDate.getHours()).padStart(2, "0");
+      const minutes = String(currentDate.getMinutes()).padStart(2, "0");
+
+      const formattedDateTime = `${year}-${month}-${day} ${hours}:${minutes}`;
       // DB에 저장
       dispatch(searchAction.saveResult());
-
+      const newImprisonment =
+        parseInt(imprisonment.year) * 12 + parseInt(imprisonment.month);
+      const newProbation =
+        parseInt(probation.year * 12) + parseInt(probation.month);
+      console.log(newImprisonment, newImprisonment);
       // 민팅
-      let nft_img = "";
+      let nft_img = "hammer";
       let case_num = selected.case_num;
       let category = selected.category;
-      let date = new Date();
-      let result;
+      let date = formattedDateTime.toString();
+      let result = `징역${newImprisonment}개월 집행유예${newProbation}개월`;
 
       if (!account) return;
-      const res = await mintJusticeTokenContract.methods
-        .mintJusticeToken(
-          "goldeHammer",
-          "case_num",
-          "category",
-          "date",
-          "징역 5년"
-        )
-        .send({ from: account });
-      console.log(res);
-      if (res.status) {
-        const balance = await mintJusticeTokenContract.methods
-          .balanceOf(account)
-          .call();
-        console.log(balance.length);
-        const animalTokenId = await mintJusticeTokenContract.methods
-          // 이 부분에서 balance.length를 사용할시 undefined가 발생한다. 따라서 balance는 민트된 nft의 양이므로 굳이 length를 쓰지 않고 일반 balance를 사용
-          .tokenOfOwnerByIndex(account, parseInt(balance, 10) - 1)
-          .call();
-        console.log(animalTokenId);
+      if (
+        await mintJusticeTokenContract.methods
+          .isDuplication(account, selected.case_num)
+          .call()
+      ) {
+        alert("이미 평가를 하셨습니다!");
+      } else {
+        const res = await mintJusticeTokenContract.methods
+          .mintJusticeToken(nft_img, case_num, category, date, result)
+          .send({ from: account });
+        console.log(res);
+        if (res.status) {
+          const balance = await mintJusticeTokenContract.methods
+            .balanceOf(account)
+            .call();
+          console.log(balance.length);
+          const animalTokenId = await mintJusticeTokenContract.methods
+            // 이 부분에서 balance.length를 사용할시 undefined가 발생한다. 따라서 balance는 민트된 nft의 양이므로 굳이 length를 쓰지 않고 일반 balance를 사용
+            .tokenOfOwnerByIndex(account, parseInt(balance, 10) - 1)
+            .call();
+          console.log(animalTokenId);
 
-        const animalType = await mintJusticeTokenContract.methods
-          .justiceTypes(animalTokenId)
-          .call();
-        console.log(animalType);
+          const animalType = await mintJusticeTokenContract.methods
+            .justiceTypes(animalTokenId)
+            .call();
+          console.log(animalType);
+        }
       }
     } catch (error) {
       console.log(error);
@@ -331,21 +376,9 @@ const SearchRight = ({ shows, clicked, showGraph, closeSearchRight }) => {
       <>
         <DetailBox>
           <BtnBox>
-            {isLogin && (
-              <>
-                <CircleBtn
-                  left={"15px"}
-                  onClick={() => {
-                    putInterest(selected.id);
-                  }}
-                >
-                  <img src={star}></img>
-                </CircleBtn>
-                <CircleBtn left={"55px"} onClick={showGraph}>
-                  <img src={shows}></img>
-                </CircleBtn>
-              </>
-            )}
+            <CircleBtn left={"55px"} onClick={showGraph}>
+              <img src={shows}></img>
+            </CircleBtn>
             <div
               onClick={() => {
                 closeSearchRight(0);
@@ -364,7 +397,7 @@ const SearchRight = ({ shows, clicked, showGraph, closeSearchRight }) => {
           </TitleBox>
 
           {Object.keys(selected).length !== 0 && (
-            <ReasonBox shows={shows} selected={selected} />
+            <ReasonBox shows={shows} selected={selected} nftInfo={nftInfo} />
           )}
 
           <Survey>
@@ -381,16 +414,64 @@ const SearchRight = ({ shows, clicked, showGraph, closeSearchRight }) => {
             <div className="make-nft">
               <div className="wrap">
                 <label>징역</label>
-                <input type="number" min={0} max={30} defaultValue={0}></input>
+                <input
+                  type="number"
+                  min={0}
+                  max={30}
+                  defaultValue={0}
+                    
+                  onChange={(e) => {
+                    setImprisoment({
+                      ...imprisonment,
+                      year: e.target.value,
+                    });
+                  }}
+                ></input>
                 <label>년</label>
-                <input type="number" min={0} max={12} defaultValue={0}></input>
+                <input
+                  type="number"
+                  min={0}
+                  max={12}
+                    
+                  defaultValue={0}
+                  onChange={(e) => {
+                    setImprisoment({
+                      ...imprisonment,
+                      month: e.target.value,
+                    });
+                  }}
+                ></input>
                 <label>월</label>
               </div>
               <div className="wrap">
                 <label>집행유예</label>
-                <input type="number" min={0} max={30} defaultValue={0}></input>
+                <input
+                  type="number"
+                  min={0}
+                  max={30}
+                    
+                  defaultValue={0}
+                  onChange={(e) => {
+                    setProbation({
+                      ...probation,
+                      year: e.target.value,
+                    });
+                  }}
+                ></input>
                 <label>년</label>
-                <input type="number" min={0} max={12} defaultValue={0}></input>
+                <input
+                  type="number"
+                  min={0}
+                  max={12}
+                  defaultValue={0}
+                    
+                  onChange={(e) => {
+                    setProbation({
+                      ...probation,
+                      month: e.target.value,
+                    });
+                  }}
+                ></input>
                 <label>월</label>
               </div>
 
@@ -402,21 +483,6 @@ const SearchRight = ({ shows, clicked, showGraph, closeSearchRight }) => {
 
             <Disabled display={display}>로그인 후 이용 가능</Disabled>
           </Survey>
-          {nftInfo == "" ? (
-            <></>
-          ) : (
-            nftInfo["0"].map((img, index) => {
-              return (
-                <ul>
-                  <li>{nftInfo["0"][index]}</li>
-                  <li>{nftInfo["1"][index]}</li>
-                  <li>{nftInfo["2"][index]}</li>
-                  <li>{nftInfo["3"][index]}</li>
-                  <li>{nftInfo["4"][index]}</li>
-                </ul>
-              );
-            })
-          )}
         </DetailBox>
       </>
     );

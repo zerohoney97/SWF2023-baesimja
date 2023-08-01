@@ -18,7 +18,8 @@ function reducer(state = init, action) {
             return {...state, succeed : false}
 
         case "SELECT_CASE":
-            return {...state, selected : payload.case, isLogin : payload.isLogin, isInterested : payload.isInterested}
+            return {...state, selected : payload}
+            // return {...state, selected : payload.case, isLogin : payload.isLogin, isInterested : payload.isInterested}
 
         case "MY_CASE":
             return {...state, myCaseArr : payload}

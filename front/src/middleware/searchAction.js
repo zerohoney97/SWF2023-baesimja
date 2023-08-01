@@ -1,19 +1,22 @@
 import axios from "axios";
-
+import caseData from "../componetsmobile/caseData";
 // case_num,title,header,detail,reason,result,probation_result,is_probation,view_count,category_id,createdAt
 // 검색한 단어가 들어있는 판례 가져오기
 function searchChk(search) {
   return async (dispatch) => {
     try {
-      const { data } = await axios.get(
-        `http://localhost:8080/case/search/${search}`,
-        {
-          withCredentials: true,
-        }
-      );
-      console.log(data);
+      // const { data } = await axios.get(
+      //   `http://localhost:8080/case/search/${search}`,
+      //   {
+      //     withCredentials: true,
+      //   }
+      // );
+      const newTempData = caseData.filter((el) => {
+        return el.category == search;
+      });
+      console.log(newTempData);
 
-      dispatch({ type: "SEARCH", payload: data });
+      dispatch({ type: "SEARCH", payload: newTempData });
     } catch (error) {
       console.log(error);
     }
@@ -24,15 +27,16 @@ function searchChk(search) {
 function selectCase(id) {
   return async (dispatch) => {
     try {
-      const { data } = await axios.get(
-        `http://localhost:8080/case/detail/${id}`,
-        {
-          withCredentials: true,
-        }
-      );
-      console.log(data);
-
-      dispatch({ type: "SELECT_CASE", payload: data });
+      // const { data } = await axios.get(
+      //   `http://localhost:8080/case/detail/${id}`,
+      //   {
+      //     withCredentials: true,
+      //   }
+      // );
+      const tempData = caseData.filter((a) => {
+        return a.id === id;
+      });
+      dispatch({ type: "SELECT_CASE", payload: tempData });
     } catch (error) {
       console.log(error);
     }

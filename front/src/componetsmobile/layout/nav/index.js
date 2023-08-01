@@ -23,13 +23,8 @@ const TopNav = ({ addInput, keyword }) => {
       setText("마이페이지");
     }
   });
-
   function moveToMyNft() {
-    if (isLogin) {
-      nav("/mynft");
-    } else {
-      alert("로그인 후 이용 가능합니다.");
-    }
+    nav("/mynft");
   }
 
   return (

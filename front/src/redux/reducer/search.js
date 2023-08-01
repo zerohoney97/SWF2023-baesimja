@@ -1,11 +1,9 @@
 let init = {
     searchArr : [],
     succeed : false,
-
     selected : {},
     isLogin : false,
     isInterested : false,
-
     myCaseArr : []
 }
 

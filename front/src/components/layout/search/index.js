@@ -251,6 +251,9 @@ const SearchRight = ({ shows, clicked, showGraph, closeSearchRight }) => {
       let date = new Date();
       let result;
 
+      const totalNum = await mintJusticeTokenContract.methods.totalSupply();
+      console.log(totalNum);
+
       if (!account) return;
       const res = await mintJusticeTokenContract.methods
         .mintJusticeToken(
@@ -262,7 +265,8 @@ const SearchRight = ({ shows, clicked, showGraph, closeSearchRight }) => {
         )
         .send({ from: account });
       console.log(res);
-      if (res.status) {
+      
+      if (Boolean(res.status) === true) {
         const balance = await mintJusticeTokenContract.methods
           .balanceOf(account)
           .call();
@@ -282,6 +286,7 @@ const SearchRight = ({ shows, clicked, showGraph, closeSearchRight }) => {
       console.log(error);
     }
   };
+
   // 민팅 정보 가져오기
   const getNftInfo = async () => {
     const nftInfo = await mintJusticeTokenContract.methods
@@ -323,7 +328,7 @@ const SearchRight = ({ shows, clicked, showGraph, closeSearchRight }) => {
           <TitleBox>
             {selected.title}
             <div className="result">
-              징역 {result} <span onClick={showResult}>미리보기</span>
+              {result} <span onClick={showResult}>미리보기</span>
             </div>
           </TitleBox>
 

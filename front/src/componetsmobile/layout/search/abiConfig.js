@@ -651,7 +651,7 @@ const saleAnimalTokenAbi = [
   },
 ];
 
-const mintJusticeTokenAddress = "0xBb4dd3497bfAB96F2Ba1953Bf45C093404e23387";
+const mintJusticeTokenAddress = "0xF4Fb8c27745d909Ad816d79787A00b7f6B7b9839";
 const saleAnimalTokenAddress = "0xD18A24028a13D542F725c459812A149d815644FE";
 
 export const web3 = new Web3(window.ethereum);
